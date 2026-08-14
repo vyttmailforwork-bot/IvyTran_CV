@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tran Trieu Vy — IT Business Analyst</title>
+<style>
+  :root{
+    --navy:#1F4E79;
+    --navy-dark:#153a5c;
+    --tan:#C8A27A;
+    --tan-light:#f1e4d3;
+    --ink:#2b2b2b;
+    --gray:#5a5a5a;
+    --paper:#fdfcfb;
+    --line:#e7e0d6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+  }
+  a{color:inherit;text-decoration:none;}
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(31,78,121,0.97);
+    backdrop-filter:blur(6px);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 6%;
+    box-shadow:0 2px 12px rgba(0,0,0,0.08);
+  }
+  nav .brand{color:#fff; font-weight:700; letter-spacing:0.5px; font-size:1.1rem;}
+  nav .brand span{color:var(--tan);}
+  nav ul{display:flex; gap:28px; list-style:none;}
+  nav ul li a{color:#e8eef4; font-size:0.92rem; font-weight:500; transition:color .2s;}
+  nav ul li a:hover{color:var(--tan);}
+  .nav-toggle{display:none; color:#fff; font-size:1.4rem; background:none; border:none; cursor:pointer;}
+
+  /* HERO */
+  header.hero{
+    background:linear-gradient(135deg,var(--navy) 0%, var(--navy-dark) 100%);
+    color:#fff;
+    padding:90px 6% 70px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  header.hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background:radial-gradient(circle at 80% 20%, rgba(200,162,122,0.18), transparent 55%);
+  }
+  header.hero h1{
+    font-size:clamp(2rem, 5vw, 3.2rem);
+    font-weight:800;
+    letter-spacing:1px;
+    position:relative;
+  }
+  header.hero .role{
+    display:inline-block;
+    margin-top:14px;
+    color:var(--navy-dark);
+    background:var(--tan);
+    padding:8px 22px;
+    border-radius:30px;
+    font-weight:700;
+    font-size:0.95rem;
+    letter-spacing:0.5px;
+    position:relative;
+  }
+  header.hero p.tagline{
+    max-width:680px; margin:26px auto 0;
+    color:#dbe6f0;
+    font-size:1.05rem;
+    position:relative;
+  }
+  .contact-row{
+    margin-top:30px; display:flex; flex-wrap:wrap; justify-content:center; gap:22px;
+    font-size:0.92rem; color:#cfe0ee; position:relative;
+  }
+  .contact-row span{display:flex; align-items:center; gap:6px;}
+
+  section{padding:70px 6%; max-width:1080px; margin:0 auto;}
+  .section-title{
+    font-size:1.7rem; font-weight:800; color:var(--navy);
+    margin-bottom:8px; text-align:center;
+  }
+  .section-sub{
+    text-align:center; color:var(--gray); margin-bottom:44px; font-size:0.98rem;
+  }
+  .rule{
+    width:60px; height:3px; background:var(--tan); margin:12px auto 0; border-radius:2px;
+  }
+
+  /* SUMMARY */
+  .summary-card{
+    background:#fff; border:1px solid var(--line); border-radius:14px;
+    padding:34px 38px; box-shadow:0 6px 24px rgba(31,78,121,0.06);
+    font-size:1.05rem; color:var(--gray); text-align:center;
+  }
+  .summary-card b{color:var(--navy);}
+
+  /* EXPERIENCE TIMELINE */
+  .timeline{position:relative; padding-left:26px;}
+  .timeline::before{
+    content:""; position:absolute; left:6px; top:6px; bottom:6px; width:2px;
+    background:var(--line);
+  }
+  .job{position:relative; margin-bottom:38px;}
+  .job::before{
+    content:""; position:absolute; left:-26px; top:6px;
+    width:14px; height:14px; border-radius:50%;
+    background:var(--tan); border:3px solid var(--navy);
+  }
+  .job-card{
+    background:#fff; border:1px solid var(--line); border-radius:12px;
+    padding:24px 28px; box-shadow:0 4px 18px rgba(31,78,121,0.05);
+  }
+  .job-head{
+    display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:8px;
+    margin-bottom:2px;
+  }
+  .job-head h3{color:var(--navy); font-size:1.15rem;}
+  .job-head .dates{color:var(--tan); font-weight:700; font-size:0.85rem; white-space:nowrap;}
+  .job-role{font-weight:700; margin-top:2px;}
+  .job-company-desc{font-style:italic; color:var(--gray); font-size:0.88rem; margin-bottom:12px;}
+  .job ul{margin-left:18px; margin-bottom:10px;}
+  .job ul li{margin-bottom:6px; font-size:0.94rem; color:var(--ink);}
+  .job ul li b{color:var(--navy-dark);}
+  .achieve-label{
+    color:var(--navy); font-weight:700; font-size:0.85rem;
+    text-transform:uppercase; letter-spacing:0.5px; margin:12px 0 6px;
+  }
+
+  /* SKILLS */
+  .skill-groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px;}
+  .skill-group{
+    background:#fff; border:1px solid var(--line); border-radius:12px; padding:20px 22px;
+    box-shadow:0 4px 16px rgba(31,78,121,0.05);
+  }
+  .skill-group h4{color:var(--navy); font-size:0.95rem; margin-bottom:12px;}
+  .tags{display:flex; flex-wrap:wrap; gap:8px;}
+  .tag{
+    background:var(--tan-light); color:var(--navy-dark);
+    padding:6px 13px; border-radius:20px; font-size:0.83rem; font-weight:600;
+    border:1px solid var(--tan);
+  }
+  .soft-tags{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:36px;}
+  .soft-tags .tag{background:var(--navy); color:#fff; border-color:var(--navy);}
+
+  /* EDUCATION & ACHIEVEMENTS */
+  .edu-card{
+    background:#fff; border:1px solid var(--line); border-radius:12px;
+    padding:26px 30px; box-shadow:0 4px 18px rgba(31,78,121,0.05); margin-bottom:28px;
+  }
+  .edu-card h3{color:var(--navy); margin-bottom:4px;}
+  .edu-meta{display:flex; flex-wrap:wrap; gap:22px; margin:14px 0; font-size:0.9rem;}
+  .edu-meta b{color:var(--navy-dark);}
+  .achv-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px;}
+  .achv-item{
+    background:#fff; border:1px solid var(--line); border-left:4px solid var(--tan);
+    border-radius:8px; padding:16px 20px; font-size:0.92rem; color:var(--ink);
+  }
+  .achv-item b{color:var(--navy);}
+
+  footer{
+    background:var(--navy-dark); color:#dbe6f0; text-align:center; padding:50px 6% 34px;
+  }
+  footer .appreciation-title{
+    color:var(--tan); font-weight:800; font-size:1.3rem; margin-bottom:10px;
+  }
+  footer .appreciation-line{
+    font-style:italic; color:#cfe0ee; max-width:560px; margin:0 auto 26px;
+  }
+  footer .footer-contact{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:24px; font-size:0.88rem;
+    border-top:1px solid rgba(255,255,255,0.15); padding-top:22px; color:#b9cbdb;
+  }
+
+  @media (max-width:720px){
+    nav ul{position:fixed; top:58px; left:0; right:0; background:var(--navy-dark);
+      flex-direction:column; padding:18px 6%; gap:16px; display:none;}
+    nav ul.open{display:flex;}
+    .nav-toggle{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">TRAN TRIEU VY <span>| IT BA</span></div>
+  <button class="nav-toggle" onclick="document.getElementById('navlinks').classList.toggle('open')">&#9776;</button>
+  <ul id="navlinks">
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <h1>TRAN TRIEU VY</h1>
+  <div class="role">IT Business Analyst</div>
+  <p class="tagline">Requirements gathering, fit/gap analysis, functional design documentation, and UAT planning across ERP implementation projects — complemented by Data Analyst skills in Python, SQL, and Power BI.</p>
+  <div class="contact-row">
+    <span>📍 Ho Chi Minh City</span>
+    <span>📞 +84 918 179 175</span>
+    <span>✉️ vytt.mailforwork@gmail.com</span>
+    <span>🔗 LinkedIn</span>
+  </div>
+</header>
+
+<section id="summary">
+  <h2 class="section-title">Summary</h2>
+  <div class="rule"></div>
+  <br>
+  <div class="summary-card">
+    <b>IT Business Analyst</b> experienced in requirements gathering, fit/gap analysis, functional design documentation, and UAT planning across ERP implementation projects. Proficient in Python, SQL, and Power BI, with a strong focus on clear documentation, stakeholder alignment, and building dashboards that support business decisions.
+  </div>
+</section>
+
+<section id="experience">
+  <h2 class="section-title">Work Experience</h2>
+  <p class="section-sub">A track record across Business Analysis, Data Analysis, and automation engineering</p>
+
+  <div class="timeline">
+
+    <div class="job">
+      <div class="job-card">
+        <div class="job-head"><h3>NOVOBI</h3><span class="dates">May 2024 – Present · Ho Chi Minh</span></div>
+        <div class="job-role">Business Analyst</div>
+        <div class="job-company-desc">US-based Odoo Gold Partner delivering ERP implementation and custom Odoo solutions</div>
+        <ul>
+          <li><b>Analyze business requirements</b> and perform BA / fit-gap analysis for Odoo ERP implementation projects.</li>
+          <li><b>Write functional requirements</b> that align customer business processes with Odoo's capabilities.</li>
+          <li><b>Draw current-state and future-state process diagrams</b> to map out solution design.</li>
+          <li><b>Demo current-state and future-state solutions</b> directly with customers to validate design decisions.</li>
+          <li><b>Design end-to-end (E2E) testing guidelines</b> and UAT scenarios for client sign-off.</li>
+          <li><b>Train customers</b> on new workflows through hands-on demo sessions.</li>
+          <li><b>Lead projects</b> from requirements gathering through go-live.</li>
+        </ul>
+        <div class="achieve-label">Achievements</div>
+        <ul>
+          <li><b>Led project delivery</b> from requirements to successful go-live across multiple Odoo implementation projects.</li>
+          <li><b>Championed an Odoo-native-first approach</b> in fit/gap analysis, favoring standard configuration over custom code.</li>
+          <li><b>Ran product demos and customer training sessions</b> that supported smooth adoption of new workflows.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="job-card">
+        <div class="job-head"><h3>DATASTUDIO</h3><span class="dates">Nov 2023 – May 2024 · Ho Chi Minh</span></div>
+        <div class="job-role">Data Analyst (Freelance)</div>
+        <div class="job-company-desc">Analytics company providing data solutions and e-commerce insights for businesses</div>
+        <ul>
+          <li><b>Gathered data</b> from e-commerce marketplaces for analysis.</li>
+          <li><b>Extracted and processed raw data</b> using Python scripts and SQL.</li>
+          <li><b>Built Power BI dashboards</b> giving the business a clear overview of marketplace performance.</li>
+        </ul>
+        <div class="achieve-label">Achievements</div>
+        <ul>
+          <li><b>Data collection</b> with Python and SQL, replacing manual marketplace exports.</li>
+          <li><b>Built Power BI dashboards</b> that gave leadership a single, clear view of marketplace performance.</li>
+          <li><b>Consolidated data</b> across multiple marketplaces into one reporting source for faster decisions.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="job-card">
+        <div class="job-head"><h3>GEOCOMPLY</h3><span class="dates">May 2023 – Aug 2023 · Ho Chi Minh</span></div>
+        <div class="job-role">Python Developer Intern</div>
+        <div class="job-company-desc">Multinational company providing internet security and fraud-prevention solutions</div>
+        <ul>
+          <li><b>Automated VPN applications</b> using Python.</li>
+          <li><b>Developed a streamlined script</b> for setting up VPN connections and crawling data into a database.</li>
+          <li><b>Enhanced internet security and fraud prevention</b> through automation.</li>
+        </ul>
+        <div class="achieve-label">Achievements</div>
+        <ul>
+          <li><b>Demonstrated in-depth understanding</b> of VPNs and related factors.</li>
+          <li><b>Proficient in Python scripting</b>, automation, and data management.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="job-card">
+        <div class="job-head"><h3>UNIVERSITY OF ECONOMICS AND LAW</h3><span class="dates">May 2022 – Nov 2023 · Ho Chi Minh</span></div>
+        <div class="job-role">Data Analyst</div>
+        <div class="job-company-desc">Collaborator role analyzing academic performance data for Law and Economics students</div>
+        <ul>
+          <li><b>Analyzed academic performance data</b> for Law and Economics students.</li>
+          <li><b>Identified and recommended development opportunities</b> for the university.</li>
+          <li><b>Executed marketing strategies</b> for the university.</li>
+        </ul>
+        <div class="achieve-label">Achievements</div>
+        <ul>
+          <li><b>Identified and recommended key developmental areas</b> for the university.</li>
+          <li><b>Executed impactful marketing campaigns</b>, leveraging Looker analytics to boost the institution's visibility and reputation.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="skills">
+  <h2 class="section-title">Technical Skills</h2>
+  <p class="section-sub">Core BA toolkit, plus hands-on Data Analyst capability</p>
+  <div class="skill-groups">
+    <div class="skill-group">
+      <h4>ERP Systems</h4>
+      <div class="tags"><span class="tag">Odoo</span><span class="tag">SAP</span></div>
+    </div>
+    <div class="skill-group">
+      <h4>Programming Languages</h4>
+      <div class="tags"><span class="tag">Python</span><span class="tag">C#</span><span class="tag">C</span><span class="tag">C++</span><span class="tag">Java</span><span class="tag">R</span></div>
+    </div>
+    <div class="skill-group">
+      <h4>Visualization Tools</h4>
+      <div class="tags"><span class="tag">Power BI</span><span class="tag">Tableau</span><span class="tag">Looker</span></div>
+    </div>
+    <div class="skill-group">
+      <h4>Query Language</h4>
+      <div class="tags"><span class="tag">SQL</span></div>
+    </div>
+    <div class="skill-group">
+      <h4>ETL</h4>
+      <div class="tags"><span class="tag">Azure Data Factory</span><span class="tag">Tableau Prep Builder</span><span class="tag">SSIS</span></div>
+    </div>
+    <div class="skill-group">
+      <h4>Business & Documentation</h4>
+      <div class="tags"><span class="tag">Confluence</span><span class="tag">Jira</span><span class="tag">draw.io</span><span class="tag">Balsamiq</span><span class="tag">Basecamp</span></div>
+    </div>
+    <div class="skill-group">
+      <h4>AI Tools</h4>
+      <div class="tags"><span class="tag">Claude</span><span class="tag">ChatGPT</span><span class="tag">Cursor</span></div>
+    </div>
+    <div class="skill-group">
+      <h4>Automation & Office</h4>
+      <div class="tags"><span class="tag">UiPath</span><span class="tag">Word</span><span class="tag">Excel</span><span class="tag">PowerPoint</span></div>
+    </div>
+  </div>
+
+  <div class="soft-tags">
+    <span class="tag">Leadership</span>
+    <span class="tag">Problem-solving</span>
+    <span class="tag">Time management</span>
+    <span class="tag">Adaptability</span>
+    <span class="tag">Self-learning</span>
+    <span class="tag">Proficient in English</span>
+  </div>
+</section>
+
+<section id="education">
+  <h2 class="section-title">Education & Achievements</h2>
+  <div class="rule"></div>
+  <br>
+
+  <div class="edu-card">
+    <h3>University of Economics and Law (UEL) – Vietnam National University HCMC</h3>
+    <div style="color:var(--gray); font-size:0.9rem;">2020 – 2024 · Ho Chi Minh</div>
+    <div class="edu-meta">
+      <span><b>Major:</b> Business Analytics and Artificial Intelligence</span>
+      <span><b>GPA:</b> 8.46/10</span>
+      <span><b>TOEIC:</b> LR 890 | SW 240</span>
+    </div>
+    <div style="font-size:0.9rem; color:var(--gray);"><b>Coursework:</b> Deep Learning, Machine Learning, Data Warehouse, Business Intelligence Systems, Data Mining</div>
+  </div>
+
+  <div class="achv-grid">
+    <div class="achv-item"><b>Top 24 Team</b> — Vietnam Datathon 2023</div>
+    <div class="achv-item"><b>Certification:</b> Odoo Functional Certification, SAP System Certificate</div>
+    <div class="achv-item"><b>Scholarship:</b> Maintained incentive scholarships for four consecutive years</div>
+    <div class="achv-item">Co-author of two domestic scientific papers on "Digital transformation in small and medium-sized businesses"</div>
+    <div class="achv-item">Co-author of "Detecting Music Plagiarism Based on Melodic Analysis" (published in a Q3 journal)</div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="appreciation-title">With Appreciation</div>
+  <div class="appreciation-line">Don't wish for it, work for it.</div>
+  <div class="footer-contact">
+    <span>📍 Ho Chi Minh City, Vietnam</span>
+    <span>📞 +84 918 179 175</span>
+    <span>✉️ vytt.mailforwork@gmail.com</span>
+    <span>🔗 LinkedIn</span>
+  </div>
+</footer>
+
+</body>
+</html>
